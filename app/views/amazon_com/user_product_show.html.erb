@@ -1,0 +1,19 @@
+<h1>マイページ</h1>
+<h3>カートに入れた商品</h3>
+<% @product.each do |p| %>
+    <% if p.user_id!=current_user.id then %>
+        <% cart = 0 %>
+        <% @user_product.each do |u| %>
+            <% if u.user_id==current_user.id && u.product_id==p.id then %>
+                <% cart = cart + u.lot %>
+            <% end %>
+        <% end %>
+        <% if cart > 0 then %>
+            商品名：<%= p.product_name %>
+            <%= link_to "#{cart}カートから出す",amazon_com_user_product_show_delete_path(id: p.id),method: :delete %><br>
+        <% end %>
+    
+        <% end %>
+<% end %>
+<hr>
+<%= link_to "戻る",root_path %>

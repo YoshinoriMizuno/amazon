@@ -1,0 +1,20 @@
+<% if user_signed_in? %>
+
+<%= form_for(@product, url: amazon_com_index_path, method: :post) do |f| %>
+
+    <p>商品名</p>
+    <%= f.text_field :product_name %>
+    <p>商品説明</p>
+    <%= f.text_area :description %>
+    <p>初期在庫数</p>
+    <%= f.number_field :stock %>
+    <p>価格</p>
+    <%= f.number_field :price %>
+    <p>ユーザＩＤ：</p>
+        <%= current_user.id %>
+    <hr>
+    <%= f.submit '商品を投稿する' %>
+<% end %>
+
+<% end %>
+ 

@@ -1,0 +1,37 @@
+<% if user_signed_in? %>
+
+<div>
+    商品名：<%= @product.product_name %>
+</div>
+<div>
+    商品説明：<%= @product.description %>
+</div>
+<div>
+    在庫：<%= @product.stock %>個
+</div>
+<div>
+    価格：<%= @product.price %>円
+</div>
+<div>
+    出品者ＩＤ：<%= @product.user_id %>
+</div>
+<hr>
+<div>
+<% if @product.user_id!=current_user.id then %>
+    <%= link_to "カートに入れる",amazon_com_user_product_create_path(id: @product.id),method: :post %>
+    <% cart = 0 %>
+    <% @user_product.each do |p| %>
+        <% if p.user_id==current_user.id && p.product_id==@product.id then %>
+            <% cart = cart + p.lot %>
+        <% end %>
+    <% end %>
+    <% if cart > 0 then %>
+        <%= link_to "カートから出す",amazon_com_user_product_delete_path(id: @product.id),method: :delete %>
+    <% end %>
+<% else %>
+    <%= link_to "編集する",edit_amazon_com_path(id: @product.id) %>
+<% end %>
+<%= link_to "戻る",root_path %>
+</div>
+
+<% end %>

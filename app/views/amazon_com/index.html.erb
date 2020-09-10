@@ -1,0 +1,28 @@
+<% if user_signed_in? %>
+ <%= image_tag 'Amazon-logo.png' %>
+    <h1> ログインしています　</h1>
+    ＩＤ：<%= link_to current_user.id,amazon_com_user_product_show_path(id: current_user.id),method: :get %><br>
+    メールアドレス：<%= current_user.email %><br>
+    名前：<%= current_user.user_name %><br>
+    年齢：<%= current_user.age %><br>
+    <h1>商品一覧</h1>
+    <% @products.each do |p| %>
+        <div>
+            商品名：<%= link_to "#{p.product_name}",amazon_com_path(id: p.id) %>
+        </div>
+    <% end %>
+    <hr>
+    <div>
+        <%= link_to "商品新規投稿",new_amazon_com_path,method: :get %>
+    </div>
+    <br>
+    <div>
+        <%= link_to "ログアウトする",destroy_user_session_path,method: :delete %>
+    </div>
+<% else %>
+    <h1> ログインしていません</h1>
+    <div>
+        <%= link_to "ログインする",new_user_session_path,method: :get %>
+    </div>
+<% end %>
+

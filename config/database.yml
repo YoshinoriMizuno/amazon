@@ -1,0 +1,35 @@
+# default: &default
+#   adapter: sqlite3
+#   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+#   timeout: 5000
+
+# development:
+#   <<: *default
+#   database: db/development.sqlite3
+
+# test:
+#   <<: *default
+#   database: db/test.sqlite3
+
+# production:
+#   <<: *default
+#   database: db/production.sqlite3
+
+default: &default
+  adapter: mysql2
+  encoding: utf8mb4
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: root
+  password: colors0582
+  # socket: /tmp/mysql.sock
+development:
+  <<: *default
+  database: amazon_app_mysql_development
+test:
+  <<: *default
+  database: amazon_app_mysql_test
+production:
+  <<: *default
+  database: amazon_app_mysql_production
+  username: amazon_app_mysql
+  password: <%= ENV['AMAZON_APP_MYSQL_DATABASE_PASSWORD'] %>

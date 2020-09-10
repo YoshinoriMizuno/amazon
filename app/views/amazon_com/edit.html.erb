@@ -1,0 +1,20 @@
+<% if user_signed_in? %>
+
+<%= form_for(@product, url: amazon_com_path, method: :patch) do |f| %>
+
+    <p>商品名</p>
+    <%= f.text_field :product_name %>
+    <p>商品説明</p>
+    <%= f.text_area :description %>
+    <p>在庫</p>
+    <%= f.number_field :stock %>個
+    <p>価格</p>
+    <%= f.number_field :price%>円
+    <p>出品者ＩＤ</p>
+    <p>ユーザＩＤ：</p>
+    <%= current_user.id %>
+     <hr>
+    <%= f.submit '商品編集を完了する' %>
+<% end %>
+
+<% end %>
